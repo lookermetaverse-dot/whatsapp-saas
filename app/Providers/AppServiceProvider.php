@@ -25,6 +25,10 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+        if ($this->app->runninginconsole()) {
+            return;
+        }
+        
         if(config('__misc.force_https', false)) {
             \URL::forceScheme('https');
         }
