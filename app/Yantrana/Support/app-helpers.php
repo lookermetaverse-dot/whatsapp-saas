@@ -453,6 +453,11 @@ if (! function_exists('setVendorSettings')) {
 if (! function_exists('getAppSettings')) {
     function getAppSettings($itemName, $itemKeys = null)
     {
+        //Prevent DB calls during build / console
+        if(app()->runninginConsole()) {
+            return null;
+        }
+        
         if ($itemKeys) {
             return Arr::get(getAppSettings($itemName), $itemKeys);
         }
