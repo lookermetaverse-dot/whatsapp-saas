@@ -17,7 +17,8 @@ use Illuminate\Support\Facades\Broadcast;
     return (int) $user->id === (int) $id;
 }); */
 
-if(getAppSettings('pusher_app_id')) {
+if (function_exists('getAppSettings')&&(getAppSettings('pusher_app_id'))) {
+    
     Broadcast::channel('vendor-channel.{vendorUid}', function ($user, $vendorUid) {
         // return true;
         return $vendorUid == getVendorUid();
